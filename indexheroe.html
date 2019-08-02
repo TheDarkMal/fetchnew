@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HEROES</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+</head>
+<style>
+h1{
+    background-color: aquamarine;
+}
+</style>
+<div class="container">
+<header><center>
+    <h1>Sueper Heroe</h1></center>
+</header>
+
+<body>
+        <input type="number" class="form-control" id="num" aria-describedby="emailHelp" placeholder="numero de heroe"><br>
+      
+
+        <center><button type="button" class="btn btn-primary" id="btsup">Buscar</button></center>
+        <div id="datoheores">
+
+
+        </div>
+        <script>
+        var btncargar = document.getElementById("btsup");
+        btncargar=addEventListener("click",carheroe);
+        var code = document.getElementById(num).values;
+        function carheroe(){
+
+            fetch("https://superheroapi.com/")
+            .then(function(responce){
+                return responce.json();
+            })
+            .then(function(mdvl){
+                var hero="";
+
+                hero ="<h1>"+mdvl[code].name+"</h1>";
+            })
+        }
+        
+        
+        </script>
+    
+
+<script src="bootstrap/js/jquery.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</div>
+</html>
