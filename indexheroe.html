@@ -1,54 +1,95 @@
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HEROES</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-</head>
-<style>
-h1{
-    background-color: aquamarine;
-}
-</style>
-<div class="container">
-<header><center>
-    <h1>Sueper Heroe</h1></center>
-</header>
-
-<body>
-        <input type="number" class="form-control" id="num" aria-describedby="emailHelp" placeholder="numero de heroe"><br>
-      
-
-        <center><button type="button" class="btn btn-primary" id="btsup">Buscar</button></center>
-        <div id="datoheores">
+    <title>Superheroes</title>
 
 
-        </div>
-        <script>
-        var btncargar = document.getElementById("btsup");
-        btncargar=addEventListener("click",carheroe);
-        var code = document.getElementById(num).values;
-        function carheroe(){
 
-            fetch("https://superheroapi.com/")
-            .then(function(responce){
-                return responce.json();
-            })
-            .then(function(mdvl){
-                var hero="";
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-                hero ="<h1>"+mdvl[code].name+"</h1>";
-            })
+    <style>
+        h1{
+            background: blue;
+            color: greenyellow;
+            text-align: center;
+            padding: 0.7em 0em;
         }
-        
-        
-        </script>
+        p{
+            text-align: center;
+        }
+        .alcentro{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        #respuesta{
+            background: #F7F6DB;
+            border: 1px solid #86A9C2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+            <h1>Heroes</h1>
+
+            <form action="#">
+
+
+                <div class="form-group">
+                        
+                        <input type="text" class="form-control" id="txthero"  placeholder="Digita un codigo entre 1 y 731">
+                    
+                </div>
+                <p>
+                    <button type="submit" class="btn btn-primary"  id="btnsubmit">Consultar</button>
+                </p>
+                
+       
+            </form>
+       
+            <div id="respuesta">
+       
+       
+            </div>
+            
+    </div>
     
 
-<script src="bootstrap/js/jquery.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        const numenviar = document.getElementById("btnsubmit");
+        const divrespuesta = document.getElementById("respuesta");
+        numenviar.addEventListener("click", prueba);
+        function prueba(e){
+            e.preventDefault();
+            console.log(document.getElementById('txthero').value);
+            fetch("https://www.superheroapi.com/api.php/645665809279716/"+document.getElementById('txthero').value)
+                .then( function(response){
+                    return  response.json();
+                  
+                }).then(function(data){
+                    console.log(data);
+                    var respu = '';
+            
+                    divrespuesta.innerHTML= "<p>Nombre: "+ data.name +"</p><p>Ocupación: "+ data.work.occupation +"</p><p>Genero: "+ data.appearance.gender +"</p><p>Raza: "+ data.appearance.race +"</p><img src='"+ data.image.url +"' width='400px' height='350px' class='alcentro'></img>";
+                }).catch(function(error){
+                    alert("El código ingresado No existe o "+ error);
+                    
+                });
+                
+            
+        }
+        
+    
+    
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-</div>
 </html>
